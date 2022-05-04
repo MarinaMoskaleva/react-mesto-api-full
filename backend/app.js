@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const validator = require('validator');
 const helmet = require('helmet');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { AVATAR_REGEX } = require('./constants');
 const auth = require('./middlewares/auth');
 const cenralErrors = require('./middlewares/central-err');
@@ -26,6 +27,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 }, (err) => {
   if (err) throw err;
 });
+
+app.use(requestLogger);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -66,6 +69,8 @@ app.use('/cards', require('./routes/cards'));
 app.use('/', (req, res, next) => {
   next(new NotFoundError('Неправильный путь.'));
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 
