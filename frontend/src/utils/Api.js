@@ -13,7 +13,6 @@ class Api {
     }
     
     getUser(){
-      console.log(`Bearer ${localStorage.getItem('token')}`);
       return fetch(`${this._baseUrl}/users/me`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('token')}`
@@ -23,7 +22,6 @@ class Api {
     }
   
     getInitialCards() {
-      console.log(`Bearer ${localStorage.getItem('token')}`);
       return fetch(`${this._baseUrl}/cards`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`
