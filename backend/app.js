@@ -16,7 +16,8 @@ const NotFoundError = require('./errors/not-found-err');
 const allowedCors = [
   'https://mesto.moskalevam.nomoredomains.work',
   'http://mesto.moskalevam.nomoredomains.work',
-  'localhost:3000',
+  'https://localhost:3000',
+  'http://localhost:3000',
 ];
 
 const { PORT = 3000 } = process.env;
