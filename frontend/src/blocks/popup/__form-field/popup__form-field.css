@@ -1,0 +1,13 @@
+.popup__form-field{
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 767px){
+    .popup__form-field {
+        margin-top: 20px;
+    }
+}

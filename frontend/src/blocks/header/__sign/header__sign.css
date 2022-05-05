@@ -1,0 +1,21 @@
+.header__sign{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #fff;
+    align-self: end;
+    text-decoration: none;
+}
+
+.header__sign:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 767px){
+    .header__sign {
+        font-size: 14px;
+        line-height: 17px;
+        margin-right: 27px;
+    }
+}

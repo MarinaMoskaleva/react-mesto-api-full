@@ -1,0 +1,28 @@
+.root {
+  margin: 0 auto;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1279px){
+  .root {
+    padding: 0 40px;
+  }
+}
+
+/* @media screen and (max-width: 1023px){
+  .root {
+      padding: 0 40px;
+  }
+} */
+
+@media screen and (max-width: 767px){
+  .root {
+      padding: 28px 0 0;
+  }
+}

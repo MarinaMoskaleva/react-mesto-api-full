@@ -1,0 +1,19 @@
+.header__logo {
+    display: block;
+    background-image: url(../../../images/Vector.svg);
+    background-size: cover;
+    width: 145px;
+    height: 33px;
+}
+
+.header__logo:hover {
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 767px){
+    .header__logo {
+        margin-left: 27px;
+        width: 103.74px;
+        height: 24.4px;
+    }
+}
