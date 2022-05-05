@@ -37,7 +37,7 @@ function App() {
       api.getContent(jwt)
       .then((res) => {
         if (res){
-          setEmail(res.data.email);
+          setEmail(res.user.email);
           setLoggedIn(true);
           history.push('/');
         }
@@ -49,17 +49,18 @@ function App() {
   }
   
   useEffect(() => {
+    tokenCheck();
+
     Promise.all([api.getUser(), api.getInitialCards()])
     .then(([userData, cardsData])=>{
-      setCurrentUser(userData);
-      setCards(cardsData);
+      setCurrentUser(userData.user);
+      setCards(cardsData.cards);
     })
     .catch((err)=>{
       console.log(err);
     });
-
-    tokenCheck();
-  },[]);
+    
+  },[loggedIn]);
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
@@ -88,7 +89,7 @@ function App() {
   function handleUpdateUser(currentUser) {
     api.patchUserData(currentUser)
         .then((data)=>{
-          setCurrentUser(data);
+          setCurrentUser(data.user);
           closeAllPopups();
         })
         .catch((err)=>{
@@ -99,7 +100,7 @@ function App() {
   function handleUpdateAvatar(currentUser) {
     api.patchAvatar(currentUser.avatar)
         .then((data)=>{
-          setCurrentUser(data);
+          setCurrentUser(data.user);
           closeAllPopups();
         })
         .catch((err)=>{
@@ -108,13 +109,13 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
     .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      setCards((state) => state.map((c) => c._id === card._id ? newCard.card : c));
     })
     .catch((err)=>{
-        console.log(err);
+      console.log(err);
     });
   }
 
@@ -131,7 +132,7 @@ function App() {
   function handleAddPlaceSubmit(cadr) {
     api.postNewCard(cadr)
         .then((data)=>{
-          setCards([data, ...cards]);
+          setCards([data.card, ...cards]);
           closeAllPopups();
         })
         .catch((err)=>{
@@ -147,6 +148,8 @@ function App() {
   function handleRegSubmit(email, password) {
     api.register(email, password)
         .then((data)=>{
+          // console.log('dataReg', data);
+          // setCurrentUser(data);
           setInfoTooltipOpen(true);
           setDataInfoTooltip({ text: 'Вы успешно зарегистрировались', image: regDone });
           history.push('/sign-in');
@@ -160,6 +163,9 @@ function App() {
 
   function handleLogin(email, logState) {
     setLoggedIn(logState);
+    console.log('logState', logState);
+    console.log('loggedIn', loggedIn);
+    console.log('email',email);
     setEmail(email);
   }
 

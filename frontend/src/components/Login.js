@@ -19,7 +19,9 @@ function Login({handleLogin, authFall}){
         }
         api.login(email, password)
         .then((data)=>{
+            console.log('Login data', data);
             if (data.token){
+                console.log('data.token', data.token);
                 localStorage.setItem('token', data.token);
                 setEmail('');
                 setPassword('');

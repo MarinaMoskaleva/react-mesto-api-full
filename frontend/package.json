@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/* marina_moskaleva@51.250.72.202:/home/marina_moskaleva/frontend" 
   },
   "eslintConfig": {
     "extends": [
