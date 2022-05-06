@@ -148,8 +148,6 @@ function App() {
   function handleRegSubmit(email, password) {
     api.register(email, password)
         .then((data)=>{
-          // console.log('dataReg', data);
-          // setCurrentUser(data);
           setInfoTooltipOpen(true);
           setDataInfoTooltip({ text: 'Вы успешно зарегистрировались', image: regDone });
           history.push('/sign-in');
@@ -163,9 +161,6 @@ function App() {
 
   function handleLogin(email, logState) {
     setLoggedIn(logState);
-    console.log('logState', logState);
-    console.log('loggedIn', loggedIn);
-    console.log('email',email);
     setEmail(email);
   }
 
